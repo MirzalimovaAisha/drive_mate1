@@ -24,13 +24,13 @@ class AuthServer{
       final data = jsonDecode(response.body);
       final token = data['tkn'];
 
-      if (token != null) {
+      if (token != null && token is String && token.isNotEmpty) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('access_token', token); // key는 "access_token"
+        await prefs.setString('access_token', token);
       }
       print('로그인 코드: $data');
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('access_token', token);
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // await prefs.setString('access_token', token);
 
       return data;
     }else{
@@ -71,7 +71,6 @@ class CarPostServer {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(responseBody);
-      print('자동차 드록 응답: $responseBody',);
       print('자동차 등록 응답: $data');
       return data;
     } else {

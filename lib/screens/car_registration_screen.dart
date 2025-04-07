@@ -40,6 +40,28 @@ class _CarRegistrationScreenState extends State<CarRegistrationScreen> {
       return;
     }
 
+    if (_selectedImage == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('이미지를 선택하세요.')),
+      );
+      return;
+    }
+    if (carName.isEmpty || carNumber.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('차량 이름과 번호를 입력하세요.')),
+      );
+      return;
+    }
+
+    if (_selectedImage == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('이미지를 선택하세요.')),
+      );
+      return;
+    }
+
+
+
     Map<String, dynamic> result = await _carPostServer.registerCar(carName, carNumber, _selectedImage!.path);
 
     if (result['success'] == true) {

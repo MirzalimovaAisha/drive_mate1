@@ -13,21 +13,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String _carName = '';
-  String _carImagePath = '';
+  String? carName;
+  String? carImagePath;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _loadCarInfo();
+    loadCarInfo();
   }
 
-  Future<void> _loadCarInfo()async{
-    final prefs = await SharedPreferences.getInstance();
+  Future<void> loadCarInfo()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _carName = prefs.getString('carName') ?? '';
-      _carImagePath = prefs.getString('carImage') ?? '';
+      carName = prefs.getString('carName') ?? '';
+      carImagePath = prefs.getString('carImage');
     });
   }
 
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Row(
                             children: [
                               InkWell(
-                                child: Text(_carName, style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
+                                child: Text(carName?? '', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
                                 onTap: (){
                                   Navigator.of(context).pushReplacementNamed('/car_selection');
                                 },
@@ -130,12 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 100,),
 
                       // ================= 차 이미지 ================
-                      Image.file(
-                        File(_carImagePath),
-                        width: double.infinity,
-                        height: 170,
-                        fit: BoxFit.fitHeight,
-                      ),
+                      carImagePath != null ? Image.file(File(carImagePath!), height: 200,): Icon(Icons.image_not_supported_outlined),
 
                       const SizedBox(height: 80,),
 

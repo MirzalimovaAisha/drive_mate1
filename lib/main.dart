@@ -26,7 +26,7 @@ void main() async {
     if (carName != null && carNumber != null && carImage != null) {
       initialScreen = BottomNaviScreen(); // 홈 페이지
     } else {
-      initialScreen = SignInScreen(); // 차량 등록 페이지
+      initialScreen = SplashScreen(); // 차량 등록 페이지
     }
   }
 

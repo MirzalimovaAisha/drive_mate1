@@ -121,7 +121,7 @@ class _CarSelectionScreenState extends State<CarSelectionScreen> {
                   carImagePath != null ? Image.file(File(carImagePath!), height: 200,): Icon(Icons.image_not_supported_outlined),
                   SizedBox(height: 10,),
                   // ======== 차 이름 ===============
-                  Text(carName!, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
+                  Text(carName ?? '이름 없음', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
                   SizedBox(height: 20,),
                   Row(
                     children: [
